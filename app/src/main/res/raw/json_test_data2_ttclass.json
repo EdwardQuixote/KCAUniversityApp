@@ -1,0 +1,100 @@
+[
+  {
+    "Day": [
+      {
+        "Monday": [
+          {
+            "Class": {
+              "Class_Unit_Code": "BIT 3101A",
+              "Class_Unit_Name": "Data Structures & Algorithms",
+              "Class_Unit_Lecturer": "Mr. Kenga",
+              "Class_Time_Start": "8AM",
+              "Class-Time_End": "10AM",
+              "Class_Room": "J1",
+              "Class_IsMakeUp": "false"
+            }
+          },
+          {
+            "Class": {
+              "Class_Unit_Code": "BIT 1301",
+              "Class_Unit_Name": "Probability and Statistics",
+              "Class_Unit_Lecturer": "Mrs. Muundia",
+              "Class_Time_Start": "11AM",
+              "Class-Time_End": "2PM",
+              "Class_Room": "TC3-1",
+              "Class_IsMakeUp": "false"
+            }
+          }
+        ]
+      },
+      {
+        "Tuesday": [
+          {
+            "Class": {
+              "Class_Unit_Code": "BIT 1305",
+              "Class_Unit_Name": "Computer Networks",
+              "Class_Unit_Lecturer": "Mr. Samuel Matende",
+              "Class_Time_Start": "8AM",
+              "Class-Time_End": "11AM",
+              "Class_Room": "TC0-2",
+              "Class_IsMakeUp": "true"
+            }
+          }
+        ]
+      },
+      {
+        "Wednesday": [
+          {}
+        ]
+      },
+      {
+        "Thursady": [
+          {
+            "Class": {
+              "Class_Unit_Code": "BIT 1303A",
+              "Class_Unit_Name": "Programming Methodologies",
+              "Class_Unit_Lecturer": "Mr. Kenga",
+              "Class_Time_Start": "8AM",
+              "Class-Time_End": "12PM",
+              "Class_Room": "TC0-2",
+              "Class_IsMakeUp": "false"
+            },
+            "Class": {
+              "Class_Unit_Code": "BIT 3101A",
+              "Class_Unit_Name": "Data Structures and Algorithms",
+              "Class_Unit_Lecturer": "Mr. Kenga",
+              "Class_Time_Start": "2PM",
+              "Class-Time_End": "5PM",
+              "Class_Room": "J1",
+              "Class_IsMakeUp": "true"
+            },
+            "Class": {
+              "Class_Unit_Code": "BIT 1309",
+              "Class_Unit_Name": "Financial Management for IT.",
+              "Class_Unit_Lecturer": "Mrs. Keziah",
+              "Class_Time_Start": "5PM",
+              "Class-Time_End": "8:30PM",
+              "Class_Room": "TC3-6",
+              "Class_IsMakeUp": "false"
+            }
+          }
+        ]
+      },
+      {
+        "Friday": [
+          {
+            "Class": {
+              "Class_Unit_Code": "BIT 1302A",
+              "Class_Unit_Name": "E-Commerce",
+              "Class_Unit_Lecturer": "Mrs. Rachel Kibuku",
+              "Class_Time_Start": "8AM",
+              "Class-Time_End": "11AM",
+              "Class_Room": "TC3-4",
+              "Class_IsMakeUp": "false"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

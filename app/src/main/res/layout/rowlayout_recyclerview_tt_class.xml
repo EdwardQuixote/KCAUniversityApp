@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardTTClass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/padding_for_cards_top"
+            android:paddingLeft="@dimen/padding_for_cards_left"
+            android:paddingRight="@dimen/padding_for_cards_right"
+            android:paddingBottom="@dimen/padding_for_cards_bottom">
+
+            <TextView
+                android:id="@+id/txtTTClassUnitName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/txtUnitName"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txtTTClassLecturer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTTClassUnitName"
+                android:layout_marginTop="15dp"
+                android:text="@string/txtLecturer"/>
+
+            <CheckBox
+                android:id="@+id/cboTTClassMakeUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBaseline="@id/txtTTClassLecturer"
+                android:text="@string/cboMakeUp"
+                android:clickable="false"/>
+
+            <TextView
+                android:id="@+id/txtTTClassTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTTClassLecturer"
+                android:layout_marginTop="15dp"
+                android:text="@string/txtTime"/>
+
+            <TextView
+                android:id="@+id/txtTTClassRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/cboTTClassMakeUp"
+                android:layout_alignBaseline="@id/txtTTClassTime"
+                android:text="@string/txtRoom"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

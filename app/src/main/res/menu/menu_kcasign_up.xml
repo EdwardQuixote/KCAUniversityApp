@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="uk.co.edwardquixote.Chaward.kcaapp.KCASignUpActivity">
+
+      <item
+            android:id="@+id/mnuSUCancel"
+            android:title="@string/mnuCancel"
+            android:icon="@drawable/ic_action_cancel"
+            android:orderInCategory="0"
+            app:showAsAction="ifRoom"/>
+
+      <item android:id="@+id/mnuSUSignUp"
+            android:title="@string/mnuSignUp"
+            android:icon="@drawable/ic_action_accept"
+            android:orderInCategory="10"
+            app:showAsAction="ifRoom"/>
+
+</menu>

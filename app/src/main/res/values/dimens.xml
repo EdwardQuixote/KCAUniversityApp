@@ -1,0 +1,38 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_home_horizontal_margin">0dp</dimen>
+    <dimen name="activity_home_vertical_margin">0dp</dimen>
+
+    <dimen name="width_for_drawer_small">250dp</dimen>
+    <dimen name="width_for_drawer">300dp</dimen>
+    <dimen name="width_for_SU_image">200dp</dimen>
+
+    <dimen name="height_for_drawer_icon">100dp</dimen>
+    <dimen name="height_for_drawer_textviews">40dp</dimen>
+    <dimen name="height_for_SU_image">200dp</dimen>
+
+    <dimen name="margin_for_cards_top">5dp</dimen>
+    <dimen name="margin_for_cards_left">5dp</dimen>
+    <dimen name="margin_for_cards_right">5dp</dimen>
+    <dimen name="margin_for_cards_bottom">5dp</dimen>
+    <dimen name="padding_drawer_categories">10dp</dimen>
+    <dimen name="padding_for_cards_top">5dp</dimen>
+    <dimen name="padding_for_cards_left">5dp</dimen>
+    <dimen name="padding_for_cards_right">5dp</dimen>
+    <dimen name="padding_for_cards_bottom">8dp</dimen>
+    <dimen name="padding_for_exlistview_groups">8dp</dimen>
+
+    <dimen name="card_height">100dp</dimen>
+    <dimen name="card_height_news">200dp</dimen>
+    <dimen name="card_height_events">200dp</dimen>
+    <dimen name="card_height_revnotes">100dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="card_corner_radius">2dp</dimen>
+
+    <dimen name="textsize_18">18sp</dimen>
+    <dimen name="textsize_20">20sp</dimen>
+    <dimen name="textsize_24">24sp</dimen>
+
+</resources>

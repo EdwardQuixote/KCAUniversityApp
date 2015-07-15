@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mnuDrawerAcademics"
+            android:title="@string/mnuAcademics" >
+            <menu>
+                <item
+                    android:id="@+id/mnuDrawerRevisionNotes"
+                    android:title="@string/mnuRevisionNotes"
+                    android:icon="@drawable/ic_action_collection"/>
+                <item
+                    android:id="@+id/mnuDrawerRevisionPapers"
+                    android:title="@string/mnuRevisionPapers"
+                    android:icon="@drawable/ic_action_collection"/>
+                <item
+                    android:id="@+id/mnuDrawerBooks"
+                    android:title="@string/mnuBooks"
+                    android:icon="@drawable/ic_open_book"/>
+                <item
+                    android:id="@+id/mnuDrawerJournals"
+                    android:title="@string/mnuJournals"
+                    android:icon="@drawable/ic_open_book"/>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/mnuDrawerLifestyle"
+            android:title="@string/mnuLifetyle">
+            <menu>
+                <item
+                    android:id="@+id/mnuDrawerEvents"
+                    android:title="@string/mnuEvents"
+                    android:icon="@drawable/ic_action_event"/>
+                <item
+                    android:id="@+id/mnuDrawerNews"
+                    android:title="@string/mnuNews"
+                    android:icon="@drawable/ic_action_web_site"/>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/mnuDrawerEntertainment"
+            android:title="@string/mnuEntertainment">
+            <menu>
+                <item
+                    android:id="@+id/mnuDrawerChats"
+                    android:title="@string/mnuChats"
+                    android:icon="@drawable/ic_action_chat"/>
+            </menu>
+        </item>
+
+        <item
+            android:id="@+id/mnuDrawerMyArea"
+            android:title="@string/mnuMySpace">
+            <menu>
+                <item
+                    android:id="@+id/mnuDrawerProfile"
+                    android:title="@string/mnuProfile"
+                    android:icon="@drawable/ic_action_person"/>
+
+                <item
+                    android:id="@+id/mnuDrawerTimeTable"
+                    android:title="@string/mnuTimeTable"
+                    android:icon="@drawable/ic_action_event"/>
+
+                <item
+                    android:id="@+id/mnuDrawerMyNotesPapers"
+                    android:title="@string/mnuMyNotesPapers"
+                    android:icon="@drawable/ic_open_book"/>
+            </menu>
+        </item>
+
+        <item
+            android:id="@+id/mnuDrawerExtras"
+            android:title="@string/mnuExtras">
+            <menu>
+                <item
+                    android:id="@+id/mnuDrawerSettings"
+                    android:title="@string/mnuSettings"
+                    android:icon="@drawable/ic_action_settings"/>
+
+                <item
+                    android:id="@+id/mnuDrawerFeedback"
+                    android:title="@string/mnuFeedback"
+                    android:icon="@drawable/ic_action_email"/>
+            </menu>
+        </item>
+    </group>
+
+</menu>

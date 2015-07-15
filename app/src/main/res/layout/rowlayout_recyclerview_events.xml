@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardEvents"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_height_events"
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
+        card_view:cardElevation="@dimen/card_elevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgvEventsCoverPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/imgvCoverPhoto"
+                android:src="@drawable/ic_kca_logo" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="@dimen/padding_for_cards_left"
+                android:paddingRight="@dimen/padding_for_cards_right">
+
+                <TextView
+                    android:id="@+id/txtEventsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/events_title"
+                    android:textSize="@dimen/textsize_18"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/txtEventsOrganizer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtEventsTitle"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/events_organizer"
+                    android:textStyle="italic"/>
+
+                <TextView
+                    android:id="@+id/txtEventsVenue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtEventsOrganizer"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/events_venue"/>
+
+                <TextView
+                    android:id="@+id/txtEventsDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignBaseline="@id/txtEventsOrganizer"
+                    android:text="@string/events_date"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
