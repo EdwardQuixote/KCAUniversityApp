@@ -28,6 +28,7 @@
     <string name="txtLecturer">Lecturer</string>
     <string name="txtTime">Time</string>
     <string name="txtRoom">Room</string>
+    <string name="txtType">Type</string>
 
     <string name="edUserName">Student ID(Username)</string>
     <string name="edPassword">Password</string>
@@ -79,6 +80,10 @@
     <string name="sInvalidID">Invalid Student ID</string>
     <string name="sInvalidPassword">Invalid Password</string>
 
+    <string name="title_fragment_revision_notes">Revision Notes</string>
+    <string name="title_fragment_revision_papers">Revision Papers</string>
+    <string name="title_fragment_books">Books</string>
+    <string name="title_fragment_journals">Journals</string>
     <string name="title_fragment_events">Events</string>
     <string name="title_fragment_news">News</string>
     <string name="title_activity_kcahome">Home</string>

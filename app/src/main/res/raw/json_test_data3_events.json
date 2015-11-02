@@ -1,0 +1,47 @@
+[
+  {
+    "Event": {
+      "Event_ID": 1,
+      "Event_Title": "KCA Tech Expo",
+      "Event_Organizer": "KCA Tech Club",
+      "Event_Venue": "KCA Grounds",
+      "Event_Date": "14th July 2015"
+    }
+  },
+  {
+    "Event": {
+      "Event_ID": 2,
+      "Event_Title": "KCA Graduation",
+      "Event_Organizer": "KCA Administration",
+      "Event_Venue": "KCA Grounds",
+      "Event_Date": "31th September 2015"
+    }
+  },
+  {
+    "Event": {
+      "Event_ID": 3,
+      "Event_Title": "Google Open Day",
+      "Event_Organizer": "KCA Tech Club",
+      "Event_Venue": "KCA Ampithetre",
+      "Event_Date": "14th June 1998"
+    }
+  },
+  {
+    "Event": {
+      "Event_ID": 4,
+      "Event_Title": "KCA Tech Expo",
+      "Event_Organizer": "KCA Tech Club",
+      "Event_Venue": "KCA Grounds",
+      "Event_Date": "15th July 2016"
+    }
+  },
+  {
+    "Event": {
+      "Event_ID": 5,
+      "Event_Title": "Festivals",
+      "Event_Organizer": "KCA Drama Club",
+      "Event_Venue": "KCA Hall",
+      "Event_Date": "21th December 2015"
+    }
+  }
+]

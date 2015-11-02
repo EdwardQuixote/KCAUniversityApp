@@ -25,7 +25,6 @@
             android:id="@+id/txtSIWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
             android:text="@string/txtWelcome"
             android:textSize="@dimen/textsize_24"
@@ -46,7 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/edUserName"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:singleLine="true"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -62,7 +62,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/edPassword"
                     android:gravity="center"
-                    android:password="true"/>
+                    android:password="true"
+                    android:singleLine="true"/>
             </android.support.design.widget.TextInputLayout>
 
             <TextView

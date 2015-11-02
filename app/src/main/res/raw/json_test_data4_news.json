@@ -1,0 +1,47 @@
+[
+  {
+    "News": {
+      "News_ID": 1,
+      "News_Title": "KCA Tech Expo",
+      "News_Author": "KCA Tech Club",
+      "News_Brief": "Making KCA's history.",
+      "News_Date": "14th July 2015"
+    }
+  },
+  {
+    "News": {
+      "News_ID": 2,
+      "News_Title": "KCA Graduation",
+      "News_Author": "KCA Administration",
+      "News_Brief": "The 2014 September Class.",
+      "News_Date": "21th September 2015"
+    }
+  },
+  {
+    "News": {
+      "News_ID": 3,
+      "News_Title": "Season of Exams",
+      "News_Author": "Tony Leisi",
+      "News_Brief": "Are you ready?",
+      "News_Date": "3th August 2015"
+    }
+  },
+  {
+    "News": {
+      "News_ID": 4,
+      "News_Title": "Women Leadership",
+      "News_Author": "Grace Wambui",
+      "News_Brief": "We need change: A woman president.",
+      "News_Date": "14th January 2015"
+    }
+  },
+  {
+    "News": {
+      "News_ID": 5,
+      "News_Title": "KCA Elections",
+      "News_Author": "KUSO",
+      "News_Brief": "Online voting?",
+      "News_Date": "14th December 2015"
+    }
+  }
+]

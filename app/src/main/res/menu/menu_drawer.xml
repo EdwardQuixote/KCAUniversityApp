@@ -38,35 +38,15 @@
                     android:icon="@drawable/ic_action_web_site"/>
             </menu>
         </item>
-        <item
-            android:id="@+id/mnuDrawerEntertainment"
-            android:title="@string/mnuEntertainment">
-            <menu>
-                <item
-                    android:id="@+id/mnuDrawerChats"
-                    android:title="@string/mnuChats"
-                    android:icon="@drawable/ic_action_chat"/>
-            </menu>
-        </item>
 
         <item
             android:id="@+id/mnuDrawerMyArea"
             android:title="@string/mnuMySpace">
             <menu>
                 <item
-                    android:id="@+id/mnuDrawerProfile"
-                    android:title="@string/mnuProfile"
-                    android:icon="@drawable/ic_action_person"/>
-
-                <item
                     android:id="@+id/mnuDrawerTimeTable"
                     android:title="@string/mnuTimeTable"
                     android:icon="@drawable/ic_action_event"/>
-
-                <item
-                    android:id="@+id/mnuDrawerMyNotesPapers"
-                    android:title="@string/mnuMyNotesPapers"
-                    android:icon="@drawable/ic_open_book"/>
             </menu>
         </item>
 

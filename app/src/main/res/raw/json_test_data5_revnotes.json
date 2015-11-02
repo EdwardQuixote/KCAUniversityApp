@@ -1,0 +1,92 @@
+[
+  {
+    "Notes": {
+      "Notes_ID": 1,
+      "Notes_Title": "Motivation of Computer Networks",
+      "Notes_Subtitle": "Lecture 2",
+      "Notes_Unit": "BIT 1305 - Computer Networks",
+      "Notes_Author": "Mr. Samuel Matende"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 2,
+      "Notes_Title": "Categories of Computer Networks",
+      "Notes_Subtitle": "Lecture 3",
+      "Notes_Unit": "BIT 1305 - Computer Networks",
+      "Notes_Author": "Mr. Samuel Matende"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 3,
+      "Notes_Title": "Introduction to Computer Networks",
+      "Notes_Subtitle": "Lecture 1",
+      "Notes_Unit": "BIT 1305 - Computer Networks",
+      "Notes_Author": "Mr. Samuel Matende"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 4,
+      "Notes_Title": "Introduction to Algorithms",
+      "Notes_Subtitle": "Lecture 1",
+      "Notes_Unit": "BIT 3101A - Data Structures and Algorithms",
+      "Notes_Author": "Mr. Kenga"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 5,
+      "Notes_Title": "Sort and Search Algorithm",
+      "Notes_Subtitle": "Lecture 13",
+      "Notes_Unit": "BIT 3101A - Data Structures and Algorithms",
+      "Notes_Author": "Mr. Kenga"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 6,
+      "Notes_Title": "Queue Data Structure",
+      "Notes_Subtitle": "Lecture 8",
+      "Notes_Unit": "BIT 3101A - Data Structures and Algorithms",
+      "Notes_Author": "Mr. Kenga"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 7,
+      "Notes_Title": "Union Data Structure",
+      "Notes_Subtitle": "Lecture 5",
+      "Notes_Unit": "BIT 3101A - Data Structures and Algorithms",
+      "Notes_Author": "Mr. Kenga"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 8,
+      "Notes_Title": "Introduction to E-Commerce",
+      "Notes_Subtitle": "Lecture 1",
+      "Notes_Unit": "BIT 1302A - E-Commerce",
+      "Notes_Author": "Mrs. Rachel Kibuku"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 9,
+      "Notes_Title": "EDI",
+      "Notes_Subtitle": "Lecture 4",
+      "Notes_Unit": "BIT 1302A - E-Commerce",
+      "Notes_Author": "Mrs. Rachel Kibuku"
+    }
+  },
+  {
+    "Notes": {
+      "Notes_ID": 10,
+      "Notes_Title": "E-Commerce Business Plan",
+      "Notes_Subtitle": "Lecture 6",
+      "Notes_Unit": "BIT 1302A - E-Commerce",
+      "Notes_Author": "Mrs. Rachel Kibuku"
+    }
+  }
+]

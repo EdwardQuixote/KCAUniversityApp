@@ -65,6 +65,10 @@ public class KCAHomeActivity extends AppCompatActivity {
 
         dlayHome.openDrawer(navDrawer);
 
+        ftHome = this.getSupportFragmentManager().beginTransaction();
+        ftHome.replace(R.id.relayHomeContainer, clsFragNews);
+        ftHome.commit();
+
     }
 
 
@@ -108,12 +112,12 @@ public class KCAHomeActivity extends AppCompatActivity {
     private void codeToCheckIfStudentIsSignedUp() {
 
         sprefStudentAccount = this.getSharedPreferences(sStudentAccount_KEY, Context.MODE_PRIVATE);
-        String sStudentID = sprefStudentAccount.getString(sStudentID_KEY, null);
+        String sStudentID = sprefStudentAccount.getString(sStudentID_KEY, "");
         if (sStudentID.equalsIgnoreCase("") || sStudentID.equalsIgnoreCase(null)) {
             codeToStartSignInActivity();
             this.finish();
         } else {
-            txtDrawerHeader.setText("ID: " + sStudentID);
+            txtDrawerHeader.setText("Reg. No.: " + sStudentID);
         }
 
     }
@@ -329,24 +333,10 @@ public class KCAHomeActivity extends AppCompatActivity {
                     codeToSetUpFragmentNews();
                     return true;
 
-                case R.id.mnuDrawerChats:
-                    //  TODO: Code for Gallery Fragment here
-                    return true;
-
-                case R.id.mnuDrawerProfile:
-                    dlayHome.closeDrawer(navDrawer);
-
-                    codeToStartSignInActivity();
-                    return true;
-
                 case R.id.mnuDrawerTimeTable:
                     dlayHome.closeDrawer(navDrawer);
 
                     codeToStartTimeTableActivity();
-                    return true;
-
-                case R.id.mnuDrawerMyNotesPapers:
-                    //  TODO: Code for My Notes and Papers here
                     return true;
 
                 case R.id.mnuDrawerSettings:

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="iaryImages">
+        <item>@drawable/ic_pic1</item>
+        <item>@drawable/ic_pic2</item>
+        <item>@drawable/ic_pic3</item>
+        <item>@drawable/ic_pic4</item>
+        <item>@drawable/ic_pic5</item>
+        <item>@drawable/ic_pic6</item>
+    </integer-array>
+</resources>

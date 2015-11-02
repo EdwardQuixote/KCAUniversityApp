@@ -27,7 +27,7 @@ public class AdapterRecyclerViewRevNotes extends RecyclerView.Adapter<AdapterRec
     private View vRVLayout;
 
     private JSONArray jaryDataArray;
-    private JSONObject jobJSONBookData;
+    private JSONObject jobJSONNotesData;
 
     public AdapterRecyclerViewRevNotes(JSONArray jsonArray) {
         this.jaryDataArray = jsonArray;
@@ -63,19 +63,18 @@ public class AdapterRecyclerViewRevNotes extends RecyclerView.Adapter<AdapterRec
 
         try {
             for (int i = 0; i < jaryDataArray.length(); i++) {
-                jobJSONBookData = new JSONObject(jaryDataArray.getString(position));
-                JSONObject jobJSONBookItem = jobJSONBookData.getJSONObject("Book");
+                jobJSONNotesData = new JSONObject(jaryDataArray.getString(position));
+                JSONObject jobJSONNotesItem = jobJSONNotesData.getJSONObject("Notes");
 
-                String sBookTitle = jobJSONBookItem.getString("Book_Title");
-                String sBookEdition = jobJSONBookItem.getString("Book_Edition");
-                String sBookSubtitle = jobJSONBookItem.getString("Book_Subtitle");
-                String sBookAuthor = jobJSONBookItem.getString("Book_Author");
-                String sBookDate = jobJSONBookItem.getString("Book_Date");
+                String sNoteTitle = jobJSONNotesItem.getString("Notes_Title");
+                String sNoteSubtitle = jobJSONNotesItem.getString("Notes_Subtitle");
+                String sNotesUnit = jobJSONNotesItem.getString("Notes_Unit");
+                String sNoteAuthor = jobJSONNotesItem.getString("Notes_Author");
 
-                clsViewHolder.txtTitleEdVol.setText(sBookTitle + " Ed.: " + sBookEdition);
-                clsViewHolder.txtSubtitle.setText(sBookSubtitle);
-                clsViewHolder.txtAuthor.setText(sBookAuthor);
-                clsViewHolder.txtDate.setText(sBookDate);
+                clsViewHolder.txtTitleEdVol.setText(sNoteTitle);
+                clsViewHolder.txtSubtitle.setText(sNoteSubtitle);
+                clsViewHolder.txtUnit.setText(sNotesUnit);
+                clsViewHolder.txtAuthor.setText(sNoteAuthor);
             }
         } catch (JSONException jsoex) {
             //  TODO: Handle JSON Error here
@@ -95,15 +94,15 @@ public class AdapterRecyclerViewRevNotes extends RecyclerView.Adapter<AdapterRec
         TextView txtTitleEdVol;
         TextView txtSubtitle;
         TextView txtAuthor;
-        TextView txtDate;
+        TextView txtUnit;
 
         public ViewHolderClass(View itemView) {
             super(itemView);
 
-            txtTitleEdVol = (TextView) itemView.findViewById(R.id.txtRevNotesTitleEditionVolume);
+            txtTitleEdVol = (TextView) itemView.findViewById(R.id.txtRevNotesTitle);
             txtSubtitle = (TextView) itemView.findViewById(R.id.txtRevNotesSubtitle);
+            txtUnit = (TextView) itemView.findViewById(R.id.txtRevNotesUnit);
             txtAuthor = (TextView) itemView.findViewById(R.id.txtRevNotesAuthor);
-            txtDate = (TextView) itemView.findViewById(R.id.txtRevNotesDatePublished);
 
         }
     }

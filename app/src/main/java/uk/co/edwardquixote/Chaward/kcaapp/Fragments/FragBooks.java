@@ -56,6 +56,8 @@ public class FragBooks extends Fragment {
      */
     private void initializeVariablesAndUIObjects() {
 
+        this.getActivity().setTitle(R.string.title_fragment_books);
+
         adpRVAdapter = new AdapterRecyclerViewBooks(codeToGetJSONData());
 
         rvlmLayoutManager = new LinearLayoutManager(this.getActivity());

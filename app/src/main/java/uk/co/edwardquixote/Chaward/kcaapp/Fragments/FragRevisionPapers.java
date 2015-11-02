@@ -56,6 +56,8 @@ public class FragRevisionPapers extends Fragment {
      */
     private void initializeVariablesAndUIObjects() {
 
+        this.getActivity().setTitle(R.string.title_fragment_revision_papers);
+
         adpRVAdapter = new AdapterRecyclerViewRevPapers(codeToGetJSONData());
 
         rvlmLayoutManager = new LinearLayoutManager(this.getActivity());
@@ -83,7 +85,7 @@ public class FragRevisionPapers extends Fragment {
 
         try {
 
-            InputStream isJSONFile = this.getResources().openRawResource(R.raw.json_test_data1);
+            InputStream isJSONFile = this.getResources().openRawResource(R.raw.json_test_data6_revpapers);
             byte[] baryFileContent = new byte[isJSONFile.available()];
             isJSONFile.read(baryFileContent);
             isJSONFile.close();

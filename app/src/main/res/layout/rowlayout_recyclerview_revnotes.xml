@@ -23,7 +23,7 @@
             android:layout_marginEnd="@dimen/margin_for_cards_right">
 
             <TextView
-                android:id="@+id/txtRevNotesTitleEditionVolume"
+                android:id="@+id/txtRevNotesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txtTitle"
@@ -33,27 +33,27 @@
                 android:id="@+id/txtRevNotesSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtRevNotesTitleEditionVolume"
+                android:layout_below="@id/txtRevNotesTitle"
                 android:layout_marginTop="10dp"
                 android:text="@string/txtSubtitle"/>
+
+            <TextView
+                android:id="@+id/txtRevNotesUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRevNotesSubtitle"
+                android:layout_marginTop="10dp"
+                android:text="@string/txtUnitName"
+                android:textStyle="italic"/>
 
             <TextView
                 android:id="@+id/txtRevNotesAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtRevNotesSubtitle"
-                android:layout_marginTop="10dp"
-                android:text="@string/txtAuthor"
-                android:textStyle="italic"/>
-
-            <TextView
-                android:id="@+id/txtRevNotesDatePublished"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@id/txtRevNotesAuthor"
-                android:text="@string/txtDatePublished"/>
+                android:layout_alignBaseline="@id/txtRevNotesUnit"
+                android:text="@string/txtAuthor"/>
 
         </RelativeLayout>
 

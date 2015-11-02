@@ -23,25 +23,25 @@
             android:layout_marginEnd="@dimen/margin_for_cards_right">
 
             <TextView
-                android:id="@+id/txtRevPapersTitleEditionVolume"
+                android:id="@+id/txtRevPapersTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txtTitle"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/txtRevPapersSubtitle"
+                android:id="@+id/txtRevPapersType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtRevPapersTitleEditionVolume"
+                android:layout_below="@id/txtRevPapersTitle"
                 android:layout_marginTop="10dp"
-                android:text="@string/txtSubtitle"/>
+                android:text="@string/txtType"/>
 
             <TextView
                 android:id="@+id/txtRevPapersAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtRevPapersSubtitle"
+                android:layout_below="@id/txtRevPapersType"
                 android:layout_marginTop="10dp"
                 android:text="@string/txtAuthor"
                 android:textStyle="italic"/>

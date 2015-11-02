@@ -56,6 +56,8 @@ public class FragJournals extends Fragment {
      */
     private void initializeVariablesAndUIObjects() {
 
+        this.getActivity().setTitle(R.string.title_fragment_journals);
+
         adpRVAdapter = new AdapterRecyclerViewJournals(codeToGetJSONData());
 
         rvlmLayoutManager = new LinearLayoutManager(this.getActivity());

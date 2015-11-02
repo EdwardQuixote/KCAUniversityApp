@@ -1,11 +1,11 @@
 package uk.co.edwardquixote.Chaward.kcaapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -87,8 +87,8 @@ public class KCASignInActivity extends AppCompatActivity {
     private void codeToGetStudentCredentials() {
 
         sprefStudentAccount = this.getSharedPreferences(sStudentAccount_KEY, Context.MODE_PRIVATE);
-        sStudentID = sprefStudentAccount.getString(sStudentID_KEY, null);
-        sStudentPassword = sprefStudentAccount.getString(sStudentPassword_KEY, null);
+        sStudentID = sprefStudentAccount.getString(sStudentID_KEY, "");
+        sStudentPassword = sprefStudentAccount.getString(sStudentPassword_KEY, "");
 
     }
 
@@ -112,6 +112,22 @@ public class KCASignInActivity extends AppCompatActivity {
             AlertDialog adgDialog = adbldDialog.create();
             adgDialog.show();
         } else if (!sPassword.equalsIgnoreCase(sStudentPassword)) {
+            AlertDialog.Builder adbldDialog = new AlertDialog.Builder(this);
+            adbldDialog.setTitle("Sign In");
+            adbldDialog.setMessage(R.string.sInvalidPassword);
+            adbldDialog.setIcon(android.R.drawable.ic_dialog_alert);
+
+            AlertDialog adgDialog = adbldDialog.create();
+            adgDialog.show();
+        } else if (sID.equalsIgnoreCase("")) {
+            AlertDialog.Builder adbldDialog = new AlertDialog.Builder(this);
+            adbldDialog.setTitle("Sign In");
+            adbldDialog.setMessage(R.string.sInvalidID);
+            adbldDialog.setIcon(android.R.drawable.ic_dialog_alert);
+
+            AlertDialog adgDialog = adbldDialog.create();
+            adgDialog.show();
+        } else if (sPassword.equalsIgnoreCase("")) {
             AlertDialog.Builder adbldDialog = new AlertDialog.Builder(this);
             adbldDialog.setTitle("Sign In");
             adbldDialog.setMessage(R.string.sInvalidPassword);
@@ -157,6 +173,8 @@ public class KCASignInActivity extends AppCompatActivity {
 
             if (!s.toString().equalsIgnoreCase(sStudentID)) {
                 tilStudentID.setError(getResources().getString(R.string.sInvalidID));
+            } else {
+                tilStudentID.setErrorEnabled(false);
             }
 
         }
@@ -184,6 +202,8 @@ public class KCASignInActivity extends AppCompatActivity {
 
             if (!s.toString().equalsIgnoreCase(sStudentPassword)) {
                 tilStudentPassword.setError(getResources().getString(R.string.sInvalidPassword));
+            } else {
+                tilStudentID.setErrorEnabled(false);
             }
 
         }
@@ -205,6 +225,7 @@ public class KCASignInActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             Intent inStartSignUp = new Intent(KCASignInActivity.this, KCASignUpActivity.class);
+            finish();
             startActivity(inStartSignUp);
 
         }

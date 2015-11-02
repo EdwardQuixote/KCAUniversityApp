@@ -5,7 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import uk.co.edwardquixote.Chaward.kcaapp.R;
 
@@ -20,12 +25,16 @@ public class AdapterRecyclerViewEvents extends RecyclerView.Adapter<AdapterRecyc
 
     private View vRVLayout;
 
-    private String[] saryItems;
+    private JSONArray jaryDataArray;
+    private JSONObject jobJSONEventData;
 
-    public AdapterRecyclerViewEvents(Context context, String[] objects) {
+    private int[] iaryImages;
+
+    public AdapterRecyclerViewEvents(Context context, JSONArray jsonArray, int[] images) {
         this.coxContext = context;
 
-        this.saryItems = objects;
+        this.jaryDataArray = jsonArray;
+        this.iaryImages = images;
     }
 
     @Override
@@ -39,16 +48,55 @@ public class AdapterRecyclerViewEvents extends RecyclerView.Adapter<AdapterRecyc
     }
 
     @Override
-    public void onBindViewHolder(AdapterRecyclerViewEvents.ViewHolderClass viewHolderClass, int i) {
+    public void onBindViewHolder(AdapterRecyclerViewEvents.ViewHolderClass viewHolderClass, int position) {
 
-        clsViewHolder.txtTitle.setText(saryItems[i]);   //  TODO: For Testing ONLY
+        codeToParseJSONData(position);
 
     }
+
+
+    /**
+     * This method reads JSON Data from a file currently,
+     * Then Parses it and Displays it on respective TextViews.
+     *
+     * //   TODO: Change this once i get server.
+     *
+     * Called in onBindViewHolder();
+     */
+    private void codeToParseJSONData(int position) {
+
+        try {
+            for (int i = 0; i < jaryDataArray.length(); i++) {
+                jobJSONEventData = new JSONObject(jaryDataArray.getString(position));
+                JSONObject jobJSONEventItem = jobJSONEventData.getJSONObject("Event");
+
+                String sEventTitle = jobJSONEventItem.getString("Event_Title");
+                String sEventOrganizer = jobJSONEventItem.getString("Event_Organizer");
+                String sEventVenue = jobJSONEventItem.getString("Event_Venue");
+                String sEventDate= jobJSONEventItem.getString("Event_Date");
+
+                for (int a = 0; a < iaryImages.length; a++) {
+                    clsViewHolder.imgvCoverPhoto.setImageResource(iaryImages[a]);
+                }
+
+                clsViewHolder.txtTitle.setText(sEventTitle);
+                clsViewHolder.txtOrganizer.setText(sEventOrganizer);
+                clsViewHolder.txtVenue.setText(sEventVenue);
+                clsViewHolder.txtDate.setText(sEventDate);
+            }
+        } catch (JSONException jsoex) {
+            //  TODO: Handle JSON Error here
+            jsoex.printStackTrace();
+        }
+
+    }
+
 
     @Override
     public int getItemCount() {
-        return saryItems.length;
+        return jaryDataArray.length();
     }
+
 
     /**
      * ViewHolder Class to hold Views in my layout.
@@ -61,15 +109,24 @@ public class AdapterRecyclerViewEvents extends RecyclerView.Adapter<AdapterRecyc
      */
     public static class ViewHolderClass extends RecyclerView.ViewHolder {
 
-        private TextView txtTitle;
+        ImageView imgvCoverPhoto;
+
+        TextView txtTitle;
+        TextView txtOrganizer;
+        TextView txtVenue;
+        TextView txtDate;
 
         public ViewHolderClass(View itemView) {
             super(itemView);
 
+            imgvCoverPhoto = (ImageView) itemView.findViewById(R.id.imgvEventsCoverPhoto);
+
             txtTitle = (TextView) itemView.findViewById(R.id.txtEventsTitle);
+            txtOrganizer = (TextView) itemView.findViewById(R.id.txtEventsOrganizer);
+            txtVenue = (TextView) itemView.findViewById(R.id.txtEventsVenue);
+            txtDate = (TextView) itemView.findViewById(R.id.txtEventsDate);
 
         }
-
     }
 
 }

@@ -1,0 +1,92 @@
+[
+  {
+    "Papers": {
+      "Papers_ID": 1,
+      "Papers_Title": "BIT 1101 - Linear Algebra",
+      "Papers_Type": "Exam",
+      "Papers_Author": "Examinations",
+      "Papers_Date": "April 2011"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 2,
+      "Papers_Title": "BIT 1102 - Foundation Physics for IT",
+      "Papers_Type": "CAT",
+      "Papers_Author": "Edward",
+      "Papers_Date": "April 2013"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 3,
+      "Papers_Title": "BIT 1304 - Programming Methodologies",
+      "Papers_Type": "Exam",
+      "Papers_Author": "Mr. Kenga",
+      "Papers_Date": "April 2011"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 4,
+      "Papers_Title": "BIT 1303 - E-Commerce",
+      "Papers_Type": "Assignment",
+      "Papers_Author": "Mrs. Rachel Kibuku",
+      "Papers_Date": "June 2015"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 5,
+      "Papers_Title": "BIT 1207 - Database Systems Principles",
+      "Papers_Type": "Exam",
+      "Papers_Author": "Mr. Peter Kiarie",
+      "Papers_Date": "April 2001"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 6,
+      "Papers_Title": "BIT 1302 - Operating Systems",
+      "Papers_Type": "Exam",
+      "Papers_Author": "Mrs. Merab",
+      "Papers_Date": "December 2012"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 7,
+      "Papers_Title": "BIT 1305 - Computer Networks",
+      "Papers_Type": "CAT",
+      "Papers_Author": "Mr. Samuel Matende",
+      "Papers_Date": "December 2015"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 8,
+      "Papers_Title": "BIT 1206 - Discrete Mathematics",
+      "Papers_Type": "CAT",
+      "Papers_Author": "Mr. Ken",
+      "Papers_Date": "January 2012"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 9,
+      "Papers_Title": "BIT 1201 - Calculus",
+      "Papers_Type": "Assignment",
+      "Papers_Author": "Mr. Ken",
+      "Papers_Date": "December 2002"
+    }
+  },
+  {
+    "Papers": {
+      "Papers_ID": 10,
+      "Papers_Title": "BIT 1104 - Computer Applications",
+      "Papers_Type": "CAT",
+      "Papers_Author": "Mr. Fred",
+      "Papers_Date": "June 2012"
+    }
+  }
+]

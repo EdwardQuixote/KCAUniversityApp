@@ -10,6 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 import uk.co.edwardquixote.Chaward.kcaapp.Adapters.AdapterRecyclerViewEvents;
 import uk.co.edwardquixote.Chaward.kcaapp.R;
 
@@ -28,7 +34,8 @@ public class FragEvents extends Fragment {
     private RecyclerView.Adapter adpRVAdapter;
     private RecyclerView.LayoutManager rvlmLayoutManager;
 
-    private String[] saryEventsTitles;
+    private int[] iaryImages;
+    private JSONArray jaryJSONFile;
 
     @Override
     public void onAttach(Activity activity) {
@@ -55,9 +62,9 @@ public class FragEvents extends Fragment {
 
         this.getActivity().setTitle(R.string.title_fragment_events);
 
-        saryEventsTitles = this.getActivity().getResources().getStringArray(R.array.saryEventsItems);
+        iaryImages = getActivity().getResources().getIntArray(R.array.iaryImages);
 
-        adpRVAdapter = new AdapterRecyclerViewEvents(this.getActivity(), saryEventsTitles);
+        adpRVAdapter = new AdapterRecyclerViewEvents(this.getActivity(), codeToGetJSONData(), iaryImages);
 
         rvlmLayoutManager = new LinearLayoutManager(this.getActivity());
 
@@ -67,6 +74,41 @@ public class FragEvents extends Fragment {
         rvEvents.setItemAnimator(new DefaultItemAnimator());
 
     }
+
+    /**
+     * Method used to read JSON File with Test Data,
+     * Create a JSONArray Object and return it,
+     * so it can be passed to the Adapter to extract the Data.
+     *
+     * Called in initializeVariablesAndUIObjects().adpRVAdapter;
+     *
+     *  //  TODO: Used for Test Data - Change when Actual Data is involved
+     *
+     * @return jaryJSONFile (JSONArray)
+     */
+    private JSONArray codeToGetJSONData() {
+
+        try {
+
+            InputStream isJSONFile = this.getResources().openRawResource(R.raw.json_test_data3_events);
+            byte[] baryFileContent = new byte[isJSONFile.available()];
+            isJSONFile.read(baryFileContent);
+            isJSONFile.close();
+
+            String sFileContent = new String(baryFileContent);
+            jaryJSONFile = new JSONArray(sFileContent);
+
+            return jaryJSONFile;
+        } catch (IOException ioex) {
+            //  TODO: Handle error here
+            return null;
+        } catch (JSONException jsoex) {
+            //  TODO: Handle Error here
+            return null;
+        }
+
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
