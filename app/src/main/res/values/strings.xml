@@ -3,6 +3,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="fbReferenceMain">https://kca-app.firebaseio.com</string>
+    <string name="fbReferenceStudentAccount">student_account</string>
+    <string name="fbREFStudentID">student_id</string>
+    <string name="fbREFStudentEmail">student_email</string>
+    <string name="fbReferenceStudentID">student_id</string>
+
     <string name="news_title">News Title</string>
     <string name="news_author">News Author</string>
     <string name="news_brief">News Brief</string>
@@ -64,16 +70,12 @@
     <string name="mnuTimeTable">Time Table</string>
     <string name="mnuMyNotesPapers">My Notes and Papers</string>
     <string name="mnuExtras">Extras</string>
+    <string name="mnuSignOut">Sign Out</string>
 
     <string name="tstNoEmailApp">Sorry, there\'s no Email App detected in your device.</string>
 
     <string name="inSendFeedbackSubject">KCA App</string>
     <string name="inSendFeedbackBody">Dear Chaward,</string>
-
-    <string name="sprefStudentAccount">uk.co.edwardquixote.Chaward.kcaapp.SPREFSTUDENTACCOUNT</string>
-    <string name="sprefStudentID">uk.co.edwardquixote.Chaward.kcaapp.SPREFSTUDENTID</string>
-    <string name="sprefStudentPassword">uk.co.edwardquixote.Chaward.kcaapp.SPREFSTUDENTPASSWORD</string>
-    <string name="sprefStudentEmail">uk.co.edwardquixote.Chaward.kcaapp.SPREFSTUDENTEMAIL</string>
 
     <string name="sDrawerOpen">Drawer Open</string>
     <string name="sDrawerClose">Drawer Close</string>

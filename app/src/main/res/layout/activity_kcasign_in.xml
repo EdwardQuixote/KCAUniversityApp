@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/relaySignIn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context="uk.co.edwardquixote.Chaward.kcaapp.KCASignInActivity">
@@ -36,24 +37,25 @@
             android:layout_centerInParent="true">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilSIUserName"
+                android:id="@+id/tilSIEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edSIUserName"
+                    android:id="@+id/edSIEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/edUserName"
+                    android:hint="@string/edStudentEmail"
                     android:gravity="center"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/tilSIPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tilSIUserName"
+                android:layout_below="@id/tilSIEmailAddress"
                 android:layout_marginTop="20dp">
 
                 <EditText
@@ -62,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/edPassword"
                     android:gravity="center"
-                    android:password="true"
+                    android:inputType="textPassword"
                     android:singleLine="true"/>
             </android.support.design.widget.TextInputLayout>
 

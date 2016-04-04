@@ -28,6 +28,7 @@ public class AdapterRecyclerViewBooks extends RecyclerView.Adapter<AdapterRecycl
         this.jaryDataArray = jsonArray;
     }
 
+    //  TODO: Implement onClickListener() or Convert to ListView
     @Override
     public AdapterRecyclerViewBooks.ViewHolderClass onCreateViewHolder(ViewGroup parent, int viewType) {
 

@@ -1,41 +1,36 @@
 package uk.co.edwardquixote.Chaward.kcaapp;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
+import uk.co.edwardquixote.Chaward.kcaapp.Dialogs.Dialogs;
 
 
 public class KCASignInActivity extends AppCompatActivity {
 
-    private Toolbar tbActionBar;
+    private Dialogs clsDialogs;
 
-    private TextView txtSignUp;
+    private RelativeLayout relaySignInLayout;
 
-    private TextInputLayout tilStudentID;
+    private TextInputLayout tilStudentEmail;
     private TextInputLayout tilStudentPassword;
 
-    private EditText edStudentID;
+    private EditText edStudentEmail;
     private EditText edStudentPassword;
-
-    private SharedPreferences sprefStudentAccount;
-
-    private String sStudentAccount_KEY;
-    private String sStudentID_KEY;
-    private String sStudentPassword_KEY;
-    private String sStudentID;
-    private String sStudentPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +38,6 @@ public class KCASignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kcasign_in);
 
         initializeVariablesAndUIObjects();
-
-        codeToGetStudentCredentials();
 
     }
 
@@ -56,39 +49,23 @@ public class KCASignInActivity extends AppCompatActivity {
      */
     private void initializeVariablesAndUIObjects() {
 
-        sStudentAccount_KEY = this.getResources().getString(R.string.sprefStudentAccount);
-        sStudentID_KEY = this.getResources().getString(R.string.sprefStudentID);
-        sStudentPassword_KEY = this.getResources().getString(R.string.sprefStudentPassword);
+        clsDialogs = new Dialogs(KCASignInActivity.this);
 
-        tbActionBar = (Toolbar) this.findViewById(R.id.tbSIToolBar);
+        relaySignInLayout = (RelativeLayout) this.findViewById(R.id.relaySignIn);
+
+        Toolbar tbActionBar = (Toolbar) this.findViewById(R.id.tbSIToolBar);
         this.setSupportActionBar(tbActionBar);
 
-        txtSignUp = (TextView) this.findViewById(R.id.txtSISignUp);
+        TextView txtSignUp = (TextView) this.findViewById(R.id.txtSISignUp);
         txtSignUp.setOnClickListener(clkTxtSignUp);
 
-        tilStudentID = (TextInputLayout) this.findViewById(R.id.tilSIUserName);
+        tilStudentEmail = (TextInputLayout) this.findViewById(R.id.tilSIEmailAddress);
         tilStudentPassword = (TextInputLayout) this.findViewById(R.id.tilSIPassword);
-        tilStudentID.setErrorEnabled(true);
+        tilStudentEmail.setErrorEnabled(true);
         tilStudentPassword.setErrorEnabled(true);
 
-        edStudentID = (EditText) this.findViewById(R.id.edSIUserName);
+        edStudentEmail = (EditText) this.findViewById(R.id.edSIEmailAddress);
         edStudentPassword = (EditText) this.findViewById(R.id.edSIPassword);
-        edStudentID.addTextChangedListener(twtEdStudentID);
-        edStudentPassword.addTextChangedListener(twtEdStudentPassword);
-
-    }
-
-    /**
-     * This method retrieves the Saved Data,
-     * when this activity launches.
-     *
-     * Called in onCreate();
-     */
-    private void codeToGetStudentCredentials() {
-
-        sprefStudentAccount = this.getSharedPreferences(sStudentAccount_KEY, Context.MODE_PRIVATE);
-        sStudentID = sprefStudentAccount.getString(sStudentID_KEY, "");
-        sStudentPassword = sprefStudentAccount.getString(sStudentPassword_KEY, "");
 
     }
 
@@ -101,45 +78,50 @@ public class KCASignInActivity extends AppCompatActivity {
      */
     private void codeToValidateStudentDetailsAndSignIn() {
 
-        String sID = edStudentID.getText().toString();
+        String sID = edStudentEmail.getText().toString();
         String sPassword = edStudentPassword.getText().toString();
-        if (!sID.equalsIgnoreCase(sStudentID)) {
-            AlertDialog.Builder adbldDialog = new AlertDialog.Builder(this);
-            adbldDialog.setTitle("Sign In");
-            adbldDialog.setMessage(R.string.sInvalidID);
-            adbldDialog.setIcon(android.R.drawable.ic_dialog_alert);
+        if (sID.equalsIgnoreCase("")) {
+            tilStudentEmail.setError("Please provide your Student Email!");
 
-            AlertDialog adgDialog = adbldDialog.create();
-            adgDialog.show();
-        } else if (!sPassword.equalsIgnoreCase(sStudentPassword)) {
-            AlertDialog.Builder adbldDialog = new AlertDialog.Builder(this);
-            adbldDialog.setTitle("Sign In");
-            adbldDialog.setMessage(R.string.sInvalidPassword);
-            adbldDialog.setIcon(android.R.drawable.ic_dialog_alert);
-
-            AlertDialog adgDialog = adbldDialog.create();
-            adgDialog.show();
-        } else if (sID.equalsIgnoreCase("")) {
-            AlertDialog.Builder adbldDialog = new AlertDialog.Builder(this);
-            adbldDialog.setTitle("Sign In");
-            adbldDialog.setMessage(R.string.sInvalidID);
-            adbldDialog.setIcon(android.R.drawable.ic_dialog_alert);
-
-            AlertDialog adgDialog = adbldDialog.create();
-            adgDialog.show();
+            edStudentEmail.requestFocus();
         } else if (sPassword.equalsIgnoreCase("")) {
-            AlertDialog.Builder adbldDialog = new AlertDialog.Builder(this);
-            adbldDialog.setTitle("Sign In");
-            adbldDialog.setMessage(R.string.sInvalidPassword);
-            adbldDialog.setIcon(android.R.drawable.ic_dialog_alert);
+            tilStudentPassword.setError("Please provide your Password!");
 
-            AlertDialog adgDialog = adbldDialog.create();
-            adgDialog.show();
+            edStudentPassword.requestFocus();
         } else {
-            codeToStartHomeActivity();
-            this.finish();
+            tilStudentEmail.setError("");
+            tilStudentPassword.setError("");
+
+            codeToSignInStudent(sID, sPassword);
         }
 
+    }
+
+    private void codeToSignInStudent(String studentID, String studentPassword) {
+
+        clsDialogs.codeToGenerateProgressDialogs("Signing you in. . .");
+
+        String sFirebaseReferenceMain = this.getResources().getString(R.string.fbReferenceMain);
+
+        Firebase fbReferenceMain = new Firebase(sFirebaseReferenceMain);
+        fbReferenceMain.authWithPassword(studentID, studentPassword, new Firebase.AuthResultHandler() {
+
+            @Override
+            public void onAuthenticated(AuthData authData) {
+                clsDialogs.codeToDismissDialogs();
+
+                Snackbar.make(relaySignInLayout, "Sign In Successful.", Snackbar.LENGTH_LONG).show();
+
+                codeToStartHomeActivity();
+            }
+
+            @Override
+            public void onAuthenticationError(FirebaseError firebaseError) {
+                clsDialogs.codeToDismissDialogs();
+
+                Snackbar.make(relaySignInLayout, "Sign In Unsuccessful. Error: " + firebaseError.getMessage(), Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     /**
@@ -150,68 +132,10 @@ public class KCASignInActivity extends AppCompatActivity {
     private void codeToStartHomeActivity() {
 
         Intent inStartHome = new Intent(KCASignInActivity.this, KCAHomeActivity.class);
+        this.finish();
         startActivity(inStartHome);
 
     }
-
-
-    /**
-     * TextWatcher meant for EditText Student ID.
-     * As the user types,
-     * it compares the value typed to the one stored.
-     * If they don't match, it shows an Error.
-     *
-     * Implemented in initializeVariablesAndUIObjects();
-     */
-    private TextWatcher twtEdStudentID = new TextWatcher() {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            if (!s.toString().equalsIgnoreCase(sStudentID)) {
-                tilStudentID.setError(getResources().getString(R.string.sInvalidID));
-            } else {
-                tilStudentID.setErrorEnabled(false);
-            }
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-
-    };
-
-    /**
-     * TextWatcher meant for EditText Student Password.
-     * As the user types,
-     * it compares the value typed to the one stored.
-     * If they don't match, it shows an Error.
-     *
-     * Implemented in initializeVariablesAndUIObjects();
-     */
-    private TextWatcher twtEdStudentPassword = new TextWatcher() {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            if (!s.toString().equalsIgnoreCase(sStudentPassword)) {
-                tilStudentPassword.setError(getResources().getString(R.string.sInvalidPassword));
-            } else {
-                tilStudentID.setErrorEnabled(false);
-            }
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-
-    };
 
     /**
      * This OnCLickListener is for Sign Up TextView.

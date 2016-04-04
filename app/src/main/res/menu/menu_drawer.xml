@@ -60,6 +60,11 @@
                     android:icon="@drawable/ic_action_settings"/>
 
                 <item
+                    android:id="@+id/mnuDrawerSignOut"
+                    android:title="@string/mnuSignOut"
+                    android:icon="@drawable/ic_action_secure"/>
+
+                <item
                     android:id="@+id/mnuDrawerFeedback"
                     android:title="@string/mnuFeedback"
                     android:icon="@drawable/ic_action_email"/>

@@ -1,8 +1,6 @@
 package uk.co.edwardquixote.Chaward.kcaapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragBooks;
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragEvents;
@@ -45,12 +49,9 @@ public class KCAHomeActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle abdtDrawerToggle;
 
-    private SharedPreferences sprefStudentAccount;
+    private Firebase fbFirebaseReferenceMain;
 
     private FragmentTransaction ftHome;
-
-    private String sStudentAccount_KEY;
-    private String sStudentID_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class KCAHomeActivity extends AppCompatActivity {
 
         initializeVariablesAndUIObjects();
 
-        codeToCheckIfStudentIsSignedUp();
+        codeToCheckIfStudentIsSignedIn();
 
         codeToSetUpNavigationDrawer();
 
@@ -79,9 +80,6 @@ public class KCAHomeActivity extends AppCompatActivity {
      */
     private void initializeVariablesAndUIObjects() {
 
-        sStudentAccount_KEY = this.getResources().getString(R.string.sprefStudentAccount);
-        sStudentID_KEY = this.getResources().getString(R.string.sprefStudentID);
-
         clsFragRevNotes = new FragRevisionNotes();
         clsFragRevPapers = new FragRevisionPapers();
         clsFragBooks = new FragBooks();
@@ -98,27 +96,6 @@ public class KCAHomeActivity extends AppCompatActivity {
         navDrawer.getMenu().findItem(R.id.mnuDrawerNews).setChecked(true);
 
         txtDrawerHeader = (TextView) this.findViewById(R.id.txtDrawerUserName);
-
-    }
-
-    /**
-     * This method checks to see if The Student has an Account already.
-     * If yes, it just takes the Student ID and sets it up,
-     * on the Drawer.
-     * If no, it starts Sign In Activity.
-     *
-     * Called in onCreateView();
-     */
-    private void codeToCheckIfStudentIsSignedUp() {
-
-        sprefStudentAccount = this.getSharedPreferences(sStudentAccount_KEY, Context.MODE_PRIVATE);
-        String sStudentID = sprefStudentAccount.getString(sStudentID_KEY, "");
-        if (sStudentID.equalsIgnoreCase("") || sStudentID.equalsIgnoreCase(null)) {
-            codeToStartSignInActivity();
-            this.finish();
-        } else {
-            txtDrawerHeader.setText("Reg. No.: " + sStudentID);
-        }
 
     }
 
@@ -145,6 +122,59 @@ public class KCAHomeActivity extends AppCompatActivity {
 
         dlayHome.setDrawerListener(abdtDrawerToggle);
 
+    }
+
+    /**
+     * This method checks to see if The Student has an Account already.
+     * If yes, it just takes the Student ID and sets it up,
+     * on the Drawer.
+     * If no, it starts Sign In Activity.
+     *
+     * Called in onCreateView();
+     */
+    private void codeToCheckIfStudentIsSignedIn() {
+
+        String sFirebaseReferenceMain = this.getResources().getString(R.string.fbReferenceMain);
+
+        fbFirebaseReferenceMain = new Firebase(sFirebaseReferenceMain);
+        AuthData adStudentAuthData = fbFirebaseReferenceMain.getAuth();
+        if (adStudentAuthData == null) {
+            codeToStartSignInActivity();
+        } else {
+            codeToRetrieveStudentIDNumber(fbFirebaseReferenceMain, adStudentAuthData);
+        }
+
+    }
+
+    /**
+     * Method retrieve's user Student ID Number.
+     *
+     * Called in this.codeToCheckIfStudentIsSignedIn();
+     *
+     * @param firebaseReferenceMain (Firebase)
+     * @param studentAuthData   (AuthData)
+     */
+    private void codeToRetrieveStudentIDNumber(Firebase firebaseReferenceMain, AuthData studentAuthData) {
+
+        String sStudentFirebaseID = studentAuthData.getUid();
+        if (sStudentFirebaseID != null) {
+            String sFirebaseRefStudentAccount = this.getResources().getString(R.string.fbReferenceStudentAccount);
+            String sFirebaseRefStudentID = this.getResources().getString(R.string.fbReferenceStudentID);
+
+            Firebase fbREFStudentAccount = firebaseReferenceMain.child(sStudentFirebaseID).child(sFirebaseRefStudentAccount);
+            Firebase fbREFStudentIDNumber = fbREFStudentAccount.child(sFirebaseRefStudentID);
+            fbREFStudentIDNumber.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    txtDrawerHeader.setText("Reg. No.: " + dataSnapshot.getValue().toString());
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                    txtDrawerHeader.setText("Welcome,");
+                }
+            });
+        }
     }
 
 
@@ -241,6 +271,7 @@ public class KCAHomeActivity extends AppCompatActivity {
     private void codeToStartSignInActivity() {
 
         Intent inStartSignIn = new Intent(KCAHomeActivity.this, KCASignInActivity.class);
+        this.finish();
         startActivity(inStartSignIn);
 
     }
@@ -341,6 +372,14 @@ public class KCAHomeActivity extends AppCompatActivity {
 
                 case R.id.mnuDrawerSettings:
                     //  TODO: Code for Settings here
+                    return true;
+
+                case R.id.mnuDrawerSignOut:
+                    if (fbFirebaseReferenceMain.getAuth() != null) {
+                        fbFirebaseReferenceMain.unauth();
+
+                        finish();
+                    }
                     return true;
 
                 case R.id.mnuDrawerFeedback:

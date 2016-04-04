@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
+
 }
 
 dependencies {
@@ -27,4 +33,5 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.roomorama:caldroid:2.1.0'
     compile 'com.squareup:android-times-square:1.5.0@aar'
+    compile 'com.firebase:firebase-client-android:2.5.2'
 }
