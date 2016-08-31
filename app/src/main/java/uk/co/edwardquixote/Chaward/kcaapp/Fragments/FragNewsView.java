@@ -49,6 +49,8 @@ public class FragNewsView extends Fragment {
      */
     private void initializeVariablesAndUIObjects(View fragmentLayout) {
 
+        //  TODO: Add ProgressDialog Here
+
         String sWebFilePath = "http://www.kca.ac.ke";   //  TODO: Testing Page. Change with Actual
 
         Log.d(FragNewsView.this.toString(), "FragNewsView WebView Loading URL: kca.ac.ke!");  //  TODO FOR Testing only
@@ -60,6 +62,8 @@ public class FragNewsView extends Fragment {
         webContentView.addJavascriptInterface(new NewsWebView2JSInterface(getActivity(), getActivity(), webContentView), sJS_INTERFACE);
 
         Log.w(FragNewsView.this.toString(), "FragNewsView WebView LOADED URL: kac.ac.ke!");  //  TODO FOR Testing only
+
+        //  TODO: Dismiss ProgressDialog here.
     }
 
 
