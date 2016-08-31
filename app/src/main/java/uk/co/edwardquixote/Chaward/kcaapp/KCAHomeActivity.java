@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,15 +24,21 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragBookView;
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragBooks;
+import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragEventView;
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragEvents;
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragJournals;
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragNews;
+import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragNewsView;
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragRevisionNotes;
 import uk.co.edwardquixote.Chaward.kcaapp.Fragments.FragRevisionPapers;
 
 
-public class KCAHomeActivity extends AppCompatActivity {
+public class KCAHomeActivity extends AppCompatActivity implements
+        FragBooks.InterfaceFragBooks,
+        FragNews.InterfaceFragNews,
+        FragEvents.InterfaceFragEvents {
 
     private FragRevisionNotes clsFragRevNotes;
     private FragRevisionPapers clsFragRevPapers;
@@ -70,6 +77,7 @@ public class KCAHomeActivity extends AppCompatActivity {
         ftHome.replace(R.id.relayHomeContainer, clsFragNews);
         ftHome.commit();
 
+        Log.i(KCAHomeActivity.this.toString(), "KCAHomeActivity just called onCreate(). FragNews IS SETUP!");  //  TODO FOR Testing only
     }
 
 
@@ -166,7 +174,9 @@ public class KCAHomeActivity extends AppCompatActivity {
             fbREFStudentIDNumber.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    txtDrawerHeader.setText("Reg. No.: " + dataSnapshot.getValue().toString());
+                    if (dataSnapshot != null) {
+                        txtDrawerHeader.setText("Reg. No.: " + dataSnapshot.getValue().toString());
+                    }
                 }
 
                 @Override
@@ -431,31 +441,6 @@ public class KCAHomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_kcahome, menu);
@@ -472,5 +457,36 @@ public class KCAHomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void codeToStartFragBookView(int position) {
+
+        //  TODO: Continue from here. Know how int position applies.
+
+        ftHome = this.getSupportFragmentManager().beginTransaction();
+        ftHome.replace(R.id.relayHomeContainer, new FragBookView());
+        ftHome.addToBackStack(null);
+        ftHome.commit();
+
+    }
+
+    @Override
+    public void codeToStartFragNewsView(int position) {
+
+        ftHome = this.getSupportFragmentManager().beginTransaction();
+        ftHome.replace(R.id.relayHomeContainer, new FragNewsView());
+        ftHome.addToBackStack(null);
+        ftHome.commit();
+    }
+
+    @Override
+    public void codeToStartFragEventView(int position) {
+
+        ftHome = this.getSupportFragmentManager().beginTransaction();
+        ftHome.replace(R.id.relayHomeContainer, new FragEventView());
+        ftHome.addToBackStack(null);
+        ftHome.commit();
     }
 }

@@ -1,9 +1,9 @@
 package uk.co.edwardquixote.Chaward.kcaapp.Adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,14 +16,11 @@ import uk.co.edwardquixote.Chaward.kcaapp.R;
 /**
  * Created by Edward Quixote on 23/06/2015.
  */
-public class AdapterRecyclerViewNews extends RecyclerView.Adapter<AdapterRecyclerViewNews.ViewHolderClass> {
+public class AdapterRecyclerViewNews extends BaseAdapter {
 
-    private ViewHolderClass  clsViewHolder;
-
-    private View vRVLayout;
+    private ViewHolderClass clsViewHolder;
 
     private JSONArray jaryDataArray;
-    private JSONObject jobJSONNewsData;
 
     private int[] iaryImages;
 
@@ -34,20 +31,43 @@ public class AdapterRecyclerViewNews extends RecyclerView.Adapter<AdapterRecycle
     }
 
     @Override
-    public AdapterRecyclerViewNews.ViewHolderClass onCreateViewHolder(ViewGroup viewGroup, int i) {
-
-        vRVLayout = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rowlayout_recyclerview_news, viewGroup, false);
-
-        clsViewHolder = new ViewHolderClass(vRVLayout);
-
-        return clsViewHolder;
+    public int getCount() {
+        return jaryDataArray.length();
     }
 
     @Override
-    public void onBindViewHolder(AdapterRecyclerViewNews.ViewHolderClass viewHolder, int position) {
+    public Object getItem(int position) {
+
+        Object object = null;
+        try {
+            object = jaryDataArray.get(position);
+        } catch (JSONException jsex) {
+            jsex.printStackTrace();
+        }
+
+        return object;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowlayout_recyclerview_news, parent, false);
+
+            clsViewHolder = new ViewHolderClass(convertView);
+            convertView.setTag(clsViewHolder);
+        } else {
+            clsViewHolder = (ViewHolderClass) convertView.getTag();
+        }
 
         codeToParseJSONData(position);
 
+        return convertView;
     }
 
 
@@ -63,7 +83,7 @@ public class AdapterRecyclerViewNews extends RecyclerView.Adapter<AdapterRecycle
 
         try {
             for (int i = 0; i < jaryDataArray.length(); i++) {
-                jobJSONNewsData = new JSONObject(jaryDataArray.getString(position));
+                JSONObject jobJSONNewsData = new JSONObject(jaryDataArray.getString(position));
                 JSONObject jobJSONNewsItem = jobJSONNewsData.getJSONObject("News");
 
                 String sNewsTitle = jobJSONNewsItem.getString("News_Title");
@@ -88,12 +108,6 @@ public class AdapterRecyclerViewNews extends RecyclerView.Adapter<AdapterRecycle
     }
 
 
-    @Override
-    public int getItemCount() {
-        return jaryDataArray.length();
-    }
-
-
     /**
      * ViewHolder Class to hold Views in my layout.
      * This class extends the RecyclerView.ViewHolder class,
@@ -103,7 +117,7 @@ public class AdapterRecyclerViewNews extends RecyclerView.Adapter<AdapterRecycle
      * Created on 23rd June 2015
      * At 11:48PM
      */
-    public static class ViewHolderClass extends RecyclerView.ViewHolder {
+    public static class ViewHolderClass {
 
         ImageView imgvCover;
 
@@ -113,7 +127,6 @@ public class AdapterRecyclerViewNews extends RecyclerView.Adapter<AdapterRecycle
         TextView txtDate;
 
         public ViewHolderClass(View itemView) {
-            super(itemView);
 
             imgvCover = (ImageView) itemView.findViewById(R.id.imgvNewsCoverPhoto);
 

@@ -3,12 +3,12 @@ package uk.co.edwardquixote.Chaward.kcaapp.Fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,27 +28,32 @@ import uk.co.edwardquixote.Chaward.kcaapp.R;
  */
 public class FragNews extends Fragment {
 
-    private View vFragNews;
+    private InterfaceFragNews interFragNews;
 
-    private RecyclerView rvNews;
-    private RecyclerView.Adapter adpRVAdapter;
-    private LinearLayoutManager llmLayoutManager;
-
-    private JSONArray jaryJSONFile;
-    private int[] iaryImages;
+    public interface InterfaceFragNews {
+        void codeToStartFragNewsView(int position);
+    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        try {
+            interFragNews = (InterfaceFragNews) activity;
+        } catch (ClassCastException ccex) {
+            throw new ClassCastException("KCAHomeActivity must implement InterfaceFragNews!");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        vFragNews = inflater.inflate(R.layout.frag_news, container, false);
+        View vFragNews = inflater.inflate(R.layout.frag_news, container, false);
 
-        initializeVariablesAndUIObjects();
+        initializeVariablesAndUIObjects(vFragNews);
+
+        Log.i(FragNews.this.toString(), "FragNews just called onCreateView() and View has been created!");  //  TODO FOR Testing only
 
         return vFragNews;
     }
@@ -58,20 +63,17 @@ public class FragNews extends Fragment {
      *
      * Called in onCreateView();
      */
-    private void initializeVariablesAndUIObjects() {
+    private void initializeVariablesAndUIObjects(View fragmentLayout) {
 
         this.getActivity().setTitle(R.string.title_fragment_news);
 
-        iaryImages = getActivity().getResources().getIntArray(R.array.iaryImages);
+        int[] iaryImages = getActivity().getResources().getIntArray(R.array.iaryImages);
 
-        adpRVAdapter = new AdapterRecyclerViewNews(codeToGetJSONData(), iaryImages);
+        AdapterRecyclerViewNews adpRVAdapter = new AdapterRecyclerViewNews(codeToGetJSONData(), iaryImages);
 
-        llmLayoutManager = new LinearLayoutManager(this.getActivity());
-
-        rvNews = (RecyclerView) vFragNews.findViewById(R.id.rvNewsRecyclerView);
-        rvNews.setLayoutManager(llmLayoutManager);
-        rvNews.setAdapter(adpRVAdapter);
-        rvNews.setItemAnimator(new DefaultItemAnimator());
+        ListView lstNews = (ListView) fragmentLayout.findViewById(R.id.lstNews);
+        lstNews.setAdapter(adpRVAdapter);
+        lstNews.setOnItemClickListener(clkLstNews);
 
     }
 
@@ -96,9 +98,7 @@ public class FragNews extends Fragment {
             isJSONFile.close();
 
             String sFileContent = new String(baryFileContent);
-            jaryJSONFile = new JSONArray(sFileContent);
-
-            return jaryJSONFile;
+            return (new JSONArray(sFileContent));
         } catch (IOException ioex) {
             //  TODO: Handle error here
             return null;
@@ -108,6 +108,15 @@ public class FragNews extends Fragment {
         }
 
     }
+
+
+    private ListView.OnItemClickListener clkLstNews = new ListView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            interFragNews.codeToStartFragNewsView(position);
+        }
+    };
 
 
     @Override
