@@ -3,12 +3,11 @@ package uk.co.edwardquixote.Chaward.kcaapp.Fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,27 +27,30 @@ import uk.co.edwardquixote.Chaward.kcaapp.R;
  */
 public class FragEvents extends Fragment {
 
-    private View vFragEvents;
+    private InterfaceFragEvents interFragEvents;
 
-    private RecyclerView rvEvents;
-    private RecyclerView.Adapter adpRVAdapter;
-    private RecyclerView.LayoutManager rvlmLayoutManager;
-
-    private int[] iaryImages;
-    private JSONArray jaryJSONFile;
+    public interface InterfaceFragEvents {
+        void codeToStartFragEventView(int position);
+    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        try {
+            interFragEvents = (InterfaceFragEvents) activity;
+        } catch (ClassCastException ccex) {
+            throw new ClassCastException("KCAHomeActivity must implement FragEvents.InterfaceFragEvents!");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        vFragEvents = inflater.inflate(R.layout.frag_events, container, false);
+        View vFragEvents = inflater.inflate(R.layout.frag_events, container, false);
 
-        initializeVariablesAndUIObjects();
+        initializeVariablesAndUIObjects(vFragEvents);
 
         return vFragEvents;
     }
@@ -58,21 +60,17 @@ public class FragEvents extends Fragment {
      *
      * Called in onCreateView();
      */
-    private void initializeVariablesAndUIObjects() {
+    private void initializeVariablesAndUIObjects(View fragmentLayout) {
 
         this.getActivity().setTitle(R.string.title_fragment_events);
 
-        iaryImages = getActivity().getResources().getIntArray(R.array.iaryImages);
+        int[] iaryImages = getActivity().getResources().getIntArray(R.array.iaryImages);
 
-        adpRVAdapter = new AdapterRecyclerViewEvents(this.getActivity(), codeToGetJSONData(), iaryImages);
+        AdapterRecyclerViewEvents adpRVAdapter = new AdapterRecyclerViewEvents(this.getActivity(), codeToGetJSONData(), iaryImages);
 
-        rvlmLayoutManager = new LinearLayoutManager(this.getActivity());
-
-        rvEvents = (RecyclerView) vFragEvents.findViewById(R.id.rvEventsRecyclerView);
-        rvEvents.setLayoutManager(rvlmLayoutManager);
-        rvEvents.setAdapter(adpRVAdapter);
-        rvEvents.setItemAnimator(new DefaultItemAnimator());
-
+        ListView lstEvents = (ListView) fragmentLayout.findViewById(R.id.lstEvents);
+        lstEvents.setAdapter(adpRVAdapter);
+        lstEvents.setOnItemClickListener(clkLstEvents);
     }
 
     /**
@@ -96,9 +94,7 @@ public class FragEvents extends Fragment {
             isJSONFile.close();
 
             String sFileContent = new String(baryFileContent);
-            jaryJSONFile = new JSONArray(sFileContent);
-
-            return jaryJSONFile;
+            return (new JSONArray(sFileContent));
         } catch (IOException ioex) {
             //  TODO: Handle error here
             return null;
@@ -109,6 +105,14 @@ public class FragEvents extends Fragment {
 
     }
 
+
+    private ListView.OnItemClickListener clkLstEvents = new ListView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            interFragEvents.codeToStartFragEventView(position);
+        }
+    };
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -124,25 +128,4 @@ public class FragEvents extends Fragment {
     public void onResume() {
         super.onResume();
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
 }

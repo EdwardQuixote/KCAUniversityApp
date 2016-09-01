@@ -3,12 +3,11 @@ package uk.co.edwardquixote.Chaward.kcaapp.Fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,26 +23,30 @@ import uk.co.edwardquixote.Chaward.kcaapp.R;
  */
 public class FragBooks extends Fragment {
 
-    private View vFragBooks;
+    private InterfaceFragBooks interFragBooks;
 
-    private RecyclerView rvBooks;
-    private RecyclerView.LayoutManager rvlmLayoutManager;
-    private RecyclerView.Adapter adpRVAdapter;
-
-    private JSONArray jaryJSONFile;
+    public interface InterfaceFragBooks {
+        void codeToStartFragBookView(int position);
+    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        try {
+            interFragBooks = (InterfaceFragBooks) activity;
+        } catch (ClassCastException ccex) {
+            throw new ClassCastException("KCAHomeActivity must implement InterfaceFragBooks!");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        vFragBooks = inflater.inflate(R.layout.frag_books, container, false);
+        View vFragBooks = inflater.inflate(R.layout.frag_books, container, false);
 
-        initializeVariablesAndUIObjects();
+        initializeVariablesAndUIObjects(vFragBooks);
 
         return vFragBooks;
     }
@@ -54,18 +57,15 @@ public class FragBooks extends Fragment {
      *
      * Called in onCreateView();
      */
-    private void initializeVariablesAndUIObjects() {
+    private void initializeVariablesAndUIObjects(View fragmentLayout) {
 
         this.getActivity().setTitle(R.string.title_fragment_books);
 
-        adpRVAdapter = new AdapterRecyclerViewBooks(codeToGetJSONData());
+        AdapterRecyclerViewBooks clsRVAdapter = new AdapterRecyclerViewBooks(codeToGetJSONData());
 
-        rvlmLayoutManager = new LinearLayoutManager(this.getActivity());
-
-        rvBooks = (RecyclerView) vFragBooks.findViewById(R.id.rvBooksRecyclerView);
-        rvBooks.setLayoutManager(rvlmLayoutManager);
-        rvBooks.setAdapter(adpRVAdapter);
-        rvBooks.setItemAnimator(new DefaultItemAnimator());
+        ListView lstBooks = (ListView) fragmentLayout.findViewById(R.id.lstBooks);
+        lstBooks.setAdapter(clsRVAdapter);
+        lstBooks.setOnItemClickListener(clkLstBooks);
 
     }
 
@@ -83,6 +83,7 @@ public class FragBooks extends Fragment {
      */
     private JSONArray codeToGetJSONData() {
 
+        JSONArray jaryJSONFile;
         try {
 
             InputStream isJSONFile = this.getResources().openRawResource(R.raw.json_test_data1);
@@ -103,6 +104,16 @@ public class FragBooks extends Fragment {
         }
 
     }
+
+
+    private ListView.OnItemClickListener clkLstBooks = new ListView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            interFragBooks.codeToStartFragBookView(position);
+        }
+    };
 
 
     @Override

@@ -1,9 +1,9 @@
 package uk.co.edwardquixote.Chaward.kcaapp.Adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -15,35 +15,55 @@ import uk.co.edwardquixote.Chaward.kcaapp.R;
 /**
  * Created by Edward Quixote on 09/07/2015.
  */
-public class AdapterRecyclerViewBooks extends RecyclerView.Adapter<AdapterRecyclerViewBooks.ViewHolderClass> {
+public class AdapterRecyclerViewBooks extends BaseAdapter {
 
     private ViewHolderClass clsViewHolder;
 
-    private View vRVLayout;
-
     private JSONArray jaryDataArray;
-    private JSONObject jobJSONBookData;
 
     public AdapterRecyclerViewBooks(JSONArray jsonArray) {
         this.jaryDataArray = jsonArray;
     }
 
-    //  TODO: Implement onClickListener() or Convert to ListView
     @Override
-    public AdapterRecyclerViewBooks.ViewHolderClass onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        vRVLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowlayout_recyclerview_books, parent, false);
-
-        clsViewHolder = new ViewHolderClass(vRVLayout);
-
-        return clsViewHolder;
+    public int getCount() {
+        return jaryDataArray.length();
     }
 
     @Override
-    public void onBindViewHolder(AdapterRecyclerViewBooks.ViewHolderClass holder, int position) {
+    public Object getItem(int position) {
+
+        Object object = null;
+        try {
+            object = jaryDataArray.get(position);
+        } catch (JSONException jsex) {
+            jsex.printStackTrace();
+        }
+
+        return object;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowlayout_recyclerview_books, parent, false);
+
+            clsViewHolder = new ViewHolderClass(convertView);
+            convertView.setTag(clsViewHolder);
+
+        } else {
+            clsViewHolder = (ViewHolderClass) convertView.getTag();
+        }
 
         codeToParseJSONData(position);
 
+        return convertView;
     }
 
 
@@ -53,10 +73,11 @@ public class AdapterRecyclerViewBooks extends RecyclerView.Adapter<AdapterRecycl
      *
      * //   TODO: Change this once i get server.
      *
-     * Called in onBindViewHolder();
+     * Called in this.getView();
      */
     private void codeToParseJSONData(int position) {
 
+        JSONObject jobJSONBookData;
         try {
             for (int i = 0; i < jaryDataArray.length(); i++) {
                 jobJSONBookData = new JSONObject(jaryDataArray.getString(position));
@@ -80,13 +101,7 @@ public class AdapterRecyclerViewBooks extends RecyclerView.Adapter<AdapterRecycl
 
     }
 
-
-    @Override
-    public int getItemCount() {
-        return jaryDataArray.length();
-    }
-
-    public static class ViewHolderClass extends RecyclerView.ViewHolder {
+    public static class ViewHolderClass {
 
         TextView txtTitleEdVol;
         TextView txtSubtitle;
@@ -94,7 +109,6 @@ public class AdapterRecyclerViewBooks extends RecyclerView.Adapter<AdapterRecycl
         TextView txtDate;
 
         public ViewHolderClass(View itemView) {
-            super(itemView);
 
             txtTitleEdVol = (TextView) itemView.findViewById(R.id.txtBooksTitleEditionVolume);
             txtSubtitle = (TextView) itemView.findViewById(R.id.txtBooksSubtitle);
